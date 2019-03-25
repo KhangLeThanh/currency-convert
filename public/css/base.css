@@ -1,0 +1,92 @@
+h1,h2,h3{
+    font-family: 'Open Sans', Arial;
+    font-weight: 500;
+    color: #000;
+  }
+label,p,li{
+  font-family: 'Open Sans', Arial;
+  font-weight: 400;
+  color: #000;
+}
+.btn{
+    font-family: 'Open Sans', Arial;
+    font-weight: 700;
+    background-color: #fcb814;
+    border-color: #fcb814;
+}
+.btn:hover,.btn:focus,.btn-primary:not(:disabled):not(.disabled):active:focus{
+    background-color: #f1ba36;
+    border-color: #f1ba36;
+    box-shadow: 0 0 0 0.2rem rgba(241, 186, 54,.5);
+}
+
+.currency{
+    padding: 20px 0px;
+}
+.currency h1{
+    text-align: center;
+}
+.wrapper-currency {
+    padding: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(0, 34, 114, 1);
+    border-radius: 20px;
+}
+.form-inline{
+    justify-content: center;
+}
+.swap-button i{
+    color: #fff;
+    font-size:2em;
+    vertical-align: middle;
+}
+.swap-button i:hover{
+    cursor: pointer;
+    color: #b1b1b1;
+}
+.mobile-icon{
+    display: none;
+}
+.wrapper-exchange{
+    text-align: center;
+    padding-top: 20px;
+}
+.first_text_exchange{
+    font-size:2em;
+}
+.text_exchange{
+    font-weight: bold;
+    font-size:4em;
+}
+@media only screen and (max-width:768px) {
+    .form-inline{
+        display: block;
+    }
+    .form-inline input{
+        margin-right: 0px !important;
+        width: 100%;
+    }
+    .form-inline .btn{
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .first_text_exchange{
+        font-size:1.5em;
+    }
+    .text_exchange{
+        font-weight: bold;
+        font-size:3em;
+    }
+    .wrapper-switch-icon{
+        text-align: center;
+    }
+    .desktop-icon{
+        display: none;
+    }
+    .mobile-icon{
+        display: block;
+        margin-bottom: 10px;
+    }
+}
