@@ -59,6 +59,11 @@ label,p,li{
     font-weight: bold;
     font-size:4em;
 }
+.error-message{
+    color: #f14a36;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 @media only screen and (max-width:768px) {
     .form-inline{
         display: block;

@@ -9,6 +9,8 @@ class App extends Component {
       convert_to:'',
       exchange_rates:'',
       check_convert: false,
+      check_validate: false,
+      hint:''
     };
     handleChange = this.handleChange.bind(this);
     handleSubmit = this.handleSubmit.bind(this);
@@ -22,16 +24,25 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    if(this.state.convert_to in this.state.currency.rates){
+    if(this.state.convert_from !== this.state.currency.base || !this.state.currency.rates.hasOwnProperty(this.state.convert_to)){
       this.setState({
-         exchange_rates: this.state.currency.rates[this.state.convert_to],
-         check_convert: true
-      })
+        hint:'*Please type three-letter abbreviation: EUR, USD',
+        check_convert:false,
+        check_validate: false
+      });
     }
+    else{
+      this.setState({
+        exchange_rates: this.state.currency.rates[this.state.convert_to],
+        hint:'',
+        check_convert:true,
+        check_validate: true
+      });
+    }
+
     event.preventDefault();
   }
   swapping(event){
-    
     this.setState({
       convert_from: this.state.convert_to,
       convert_to: this.state.convert_from,
@@ -57,12 +68,16 @@ class App extends Component {
   componentDidMount() {
     this.fetchData();
   }
-  componentDidUpdate() {
-    this.fetchData();
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.convert_from !== prevState.convert_from){
+      this.fetchData();
+    }
+    
   }
   render() {
     let userMessage;
-    if (this.state.check_convert == true) {
+    
+    if (this.state.check_convert === true || this.check_validate === true) {
       userMessage = (
         <div className="wrapper-exchange">
           <div><p className="first_text_exchange">1 {this.state.convert_from} = </p></div> 
@@ -72,9 +87,12 @@ class App extends Component {
     }
     else {
       userMessage = (
-        <p></p>
+        <div className="wrapper-exchange">
+          <div><p className="error-message">{this.state.hint}</p></div> 
+        </div>
       )
     }
+    
     return (
       <section className="currency">
          <div className="container">
@@ -87,17 +105,18 @@ class App extends Component {
                     <div className="form-group mr-sm-2">
                    
                       <input placeholder="Convert From" className="form-control  mr-sm-2"  type="text" name="convert_from" value={this.state.convert_from} onChange={this.handleChange} />
-                    
+
                     </div>
                     <div className="wrapper-switch-icon">
                       <a className="swap-button mr-sm-2" onClick={this.swapping}>
-                        <i class="desktop-icon material-icons">swap_horiz</i>
-                        <i class="mobile-icon material-icons">swap_vert</i>
+                        <i className="desktop-icon material-icons">swap_horiz</i>
+                        <i className="mobile-icon material-icons">swap_vert</i>
                       </a>
                     </div>
                   
                     <div className="form-group mr-sm-2">
                         <input placeholder="Convert To" className="form-control mr-sm-2" type="text" name="convert_to" value={this.state.convert_to} onChange={this.handleChange} />
+
                     </div>
                     <button type="submit" className="btn btn-primary mr-sm-2">Convert</button>
                   </form>
